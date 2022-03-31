@@ -1,0 +1,49 @@
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.ref=None
+class LinkedList:
+    def __init__(self):
+        self.head=None
+    def add_begin(self,data):
+    #step1: create a node to add at the beginning with the help of previously created Node class  (  new_node=node(data)  )
+    #step2:when you created the node,the ref of that node will be set as None,so update the ref as the head,because head is the ref of the 1st node and 
+    #since we are placing at the starting (  new_node.ref=self.head   )
+    #we have just refernced the newly created as head and didn't changed the head to the newly created Node ,so update head as self.head=new_node
+        new_node=Node(data)
+        new_node.ref=self.head
+        self.head=new_node
+    def add_end(self,data):
+    #check if there is any node present previously ,if not assign the head as the node added at the end
+        last=Node(data)
+        if self.head is None:
+            self.head=last
+            return
+        else:
+        #if there are nodes in the list previously then traverse to the end of the list and assign the node to the ref of the last node
+            n=self.head
+            while(n.ref):
+                n=n.ref
+            n.ref=last
+                
+    def print_ll(self):
+        if self.head is None:
+            print("linked List is empty")
+        else:
+            n=self.head
+            while(n is not None):
+                print(n.data+"-->",end='')
+                n=n.ref
+    
+node1=Node("secocnd")
+node2=Node("Third")
+node3=Node("Fourth")
+#we have just created the Nodes ,but not yet linked them.inorder to link assign 1st node as head in the linkedlist class
+ll=LinkedList()
+ll.head=node1
+#now,the head is referenced but the remaining nodes are not connected to each other.so connect the nodes to the references of the previous nodes
+node1.ref=node2
+node2.ref=node3
+ll.add_begin("First")
+ll.add_end("last")
+ll.print_ll()
