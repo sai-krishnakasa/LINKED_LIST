@@ -1,0 +1,46 @@
+Given the head of a linked list, remove the nth node from the end of the list and return its head.
+Example 1:
+Input: head = [1,2,3,4,5], n = 2
+Output: [1,2,3,5]
+Example 2:
+
+FOR DIAGRAMATIC REF:https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+
+Input: head = [1], n = 1
+Output: []
+Example 3:
+
+Input: head = [1,2], n = 1
+Output: [1]
+Constraints:
+The number of nodes in the list is sz.
+1 <= sz <= 30
+0 <= Node.val <= 100
+1 <= n <= sz
+EXPLANATION:
+          TO DELETE THE Nth node from the left we have first find the location of the node to be deleted
+          for that if we simply calculate the length of the list and do length-n
+          length-n is the position where the node is to be deleted
+          Traverse till the length-n and make next of node as next.next...This will eliminate that node
+          !WHATIF suppose lenth of list=1 and n=1:
+                    Then if you delete the node there will be nothing right and we don't have to delete the node we can simply return NOne as we know there
+                    the length=1 and if we delete there will be nothing ,so return None
+                    SOLUTION:
+                    
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        length=0
+        n1=ans=head
+        while(n1):
+            length+=1
+            n1=n1.next
+        if(length==1 and n==1):
+            return None
+        move=length-n
+        if(move==0):
+            head=ans.next
+            return head
+        for _ in range(move-1):
+            ans=ans.next
+        ans.next=ans.next.next
+        return head
